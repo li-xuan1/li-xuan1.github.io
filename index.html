@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>济南市历城区礼轩小学 · 魅力未来版</title>
+    <style>
+        /* ===== 基础重置 & 现代化变量 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            color: #1e2b39;
+            line-height: 1.6;
+            background: linear-gradient(145deg, #f0f5fe 0%, #e9f0fa 100%);
+            overflow-x: hidden;
+        }
+
+        /* ===== 毛玻璃通用效果 ===== */
+        .glass-morph {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 25, 45, 0.25), inset 0 1px 2px rgba(255,255,255,0.8);
+        }
+
+        /* ===== 头部 (毛玻璃强化) ===== */
+        header {
+            position: relative;
+            background: rgba(32, 77, 129, 0.75);
+            backdrop-filter: blur(14px) saturate(200%);
+            -webkit-backdrop-filter: blur(14px) saturate(200%);
+            color: white;
+            padding: 8px 0;
+            box-shadow: 0 8px 32px rgba(0, 45, 80, 0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+        }
+        .header-container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .header-container:hover {
+            transform: translateY(-2px);
+        }
+        .school-logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .school-logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.7);
+            background: white;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2), box-shadow 0.4s;
+            box-shadow: 0 10px 20px rgba(0, 30, 70, 0.3);
+        }
+        .school-logo img:hover {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 0 8px rgba(255,215,0,0.3);
+        }
+        .school-name {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 3px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(to right, #fff, #ffe6a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all 0.3s;
+        }
+        .school-address {
+            font-size: 14px;
+            margin-top: 6px;
+            color: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===== 导航栏 毛玻璃 + 微动 ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(18px) saturate(200%);
+            -webkit-backdrop-filter: blur(18px) saturate(200%);
+            border-bottom: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 12px 30px -8px rgba(0, 35, 70, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-list {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .nav-list li {
+            position: relative;
+        }
+        .nav-list a {
+            display: block;
+            padding: 16px 26px;
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 550;
+            font-size: 16.5px;
+            border-radius: 60px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            background: transparent;
+            margin: 4px 0;
+        }
+        .nav-list a:hover {
+            background: rgba(42, 96, 153, 0.2);
+            backdrop-filter: blur(10px);
+            color: #1e4f8a;
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(0,60,120,0.3);
+        }
+        /* 灵动下划线 */
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #2a6099;
+            border-radius: 4px;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        .nav-list a:hover::after {
+            width: 40%;
+        }
+
+        /* ===== 轮播图区域 (液态玻璃 + 旋转动画) ===== */
+        .banner {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background: #0b2a47;
+        }
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            animation: slideShow 24s infinite ease-in-out;
+        }
+        .banner-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .banner-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0,60,110,0.4), rgba(0,20,40,0.7));
+            backdrop-filter: blur(2px);
+        }
+        .banner-text {
+            position: absolute;
+            top: 50%;
+            left: 8%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px) saturate(300%);
+            -webkit-backdrop-filter: blur(20px) saturate(300%);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 70px 20px 70px 20px;
+            padding: 35px 55px;
+            color: white;
+            box-shadow: 0 35px 68px rgba(0, 20, 40, 0.5);
+            animation: floatBanner 4s infinite alternate;
+            max-width: 650px;
+        }
+        .banner-text h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 15px #00000050;
+        }
+        .banner-text p {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+
+        @keyframes slideShow {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-100%); }
+            50%, 70% { transform: translateX(-200%); }
+            75%, 95% { transform: translateX(-300%); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes floatBanner {
+            0% { transform: translateY(-50%) translateX(0); }
+            100% { transform: translateY(-55%) translateX(8px); }
+        }
+
+        /* ===== 主内容区域 ===== */
+        .main-content {
+            width: 90%;
+            max-width: 1300px;
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .content-left { width: 68%; }
+        .content-right { width: 30%; }
+
+        /* 通用区块 毛玻璃+悬停动效 */
+        .section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 42px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px -10px rgba(0,30,60,0.2);
+            transition: all 0.4s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+        .section:hover {
+            transform: scale(1.01) translateY(-8px);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 30px 60px -8px #1e3f60a0;
+            border-color: rgba(255,255,255,0.95);
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #1e4b77;
+            border-bottom: 4px solid #2a6099;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: inline-block;
+            border-radius: 0 0 20px 0;
+            text-shadow: 0 2px 6px rgba(42,96,153,0.2);
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .section:hover .section-title {
+            letter-spacing: 3px;
+            color: #1a3f63;
+        }
+
+        /* 简介文字 */
+        .intro p {
+            margin-bottom: 15px;
+            text-indent: 2em;
+            font-size: 16.5px;
+            transition: 0.3s;
+        }
+        .intro p:hover {
+            text-indent: 2.5em;
+            color: #0a2f4a;
+        }
+
+        /* 新闻列表 悬停跳动 */
+        .news-list {
+            list-style: none;
+        }
+        .news-list li {
+            padding: 14px 0;
+            border-bottom: 1px dashed rgba(42,96,153,0.3);
+            display: flex;
+            justify-content: space-between;
+            transition: 0.25s;
+            border-radius: 30px;
+        }
+        .news-list li:hover {
+            background: rgba(42,96,153,0.1);
+            padding-left: 15px;
+            padding-right: 15px;
+            transform: translateX(6px) scale(1.02);
+            backdrop-filter: blur(4px);
+        }
+        .news-list a {
+            color: #1f3a57;
+            text-decoration: none;
+            width: 78%;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .news-list a:hover { color: #2a6099; }
+        .news-date {
+            color: #5e6f82;
+            font-size: 13px;
+            background: rgba(255,255,255,0.5);
+            padding: 3px 12px;
+            border-radius: 50px;
+        }
+
+        /* 校园风采 (液态卡片 + 旋转动画) */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+        }
+        .gallery-item {
+            width: 30%;
+            min-width: 130px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 38px;
+            padding: 15px 10px;
+            transition: all 0.35s cubic-bezier(0.2,0.8,0.4,1.2);
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.1);
+        }
+        .gallery-item:hover {
+            transform: rotate(1deg) scale(1.07);
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 30px 40px -10px #1f4980;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 32px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+            transition: 0.6s;
+        }
+        .gallery-item:hover img {
+            transform: rotate(2deg) scale(1.02);
+            border-radius: 50px 20px;
+        }
+        .gallery-item p {
+            text-align: center;
+            margin-top: 12px;
+            font-weight: 550;
+            color: #1e3a5f;
+        }
+
+        /* 右侧卡片 额外图片动感 */
+        .side-card {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(20px);
+            border-radius: 42px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: 0.3s;
+        }
+        .side-card:hover {
+            background: rgba(255,255,255,0.75);
+            transform: translateY(-8px);
+        }
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 60px;
+            padding: 10px 18px;
+            margin: 12px 0;
+            transition: 0.2s;
+            border: 1px solid white;
+        }
+        .contact-info p:hover {
+            background: white;
+            color: #1e4f8a;
+            transform: scale(1.02) translateX(5px);
+            box-shadow: 0 6px 16px #a0c1e0;
+        }
+
+        /* 招生信息突出 */
+        .admission {
+            background: linear-gradient(125deg, rgba(255,255,255,0.6), rgba(200,225,255,0.5));
+            backdrop-filter: blur(18px);
+        }
+        .admission p:last-child {
+            font-size: 22px;
+            background: rgba(42,96,153,0.2);
+            border-radius: 60px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid white;
+            animation: gentlePulse 2.2s infinite;
+        }
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 0 0 0 rgba(42,96,153,0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(42,96,153,0); }
+            100% { box-shadow: 0 0 0 0 rgba(42,96,153,0); }
+        }
+
+        /* 新增三个旋转小图片 (增加视觉停留) */
+        .floating-badges {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0 10px;
+        }
+        .float-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spinSlow 10s infinite linear;
+            border: 2px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.4s;
+        }
+        .float-icon:hover {
+            animation: spinSlow 3s infinite linear;
+            transform: scale(1.2);
+            border-color: #ffc107;
+        }
+        .float-icon img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        @keyframes spinSlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 底部毛玻璃 */
+        footer {
+            background: rgba(32, 77, 129, 0.75);
+            backdrop-filter: blur(18px) saturate(250%);
+            -webkit-backdrop-filter: blur(18px) saturate(250%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.4);
+        }
+        .footer-container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-section {
+            width: 30%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(6px);
+            border-radius: 40px;
+            padding: 22px;
+            transition: 0.3s;
+        }
+        .footer-section:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-10px);
+        }
+        .footer-title {
+            font-size: 20px;
+            border-bottom: 2px solid white;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+            padding: 5px 0;
+            display: inline-block;
+        }
+        .footer-section a:hover {
+            transform: translateX(8px);
+            text-shadow: 0 0 10px white;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            font-size: 14px;
+            opacity: 0.9;
+            width: 100%;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 800px) {
+            .main-content { flex-direction: column; }
+            .content-left, .content-right { width: 100%; }
+            .gallery-item { width: 45%; }
+            .banner-text h2 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 毛玻璃 -->
+    <header>
+        <div class="header-container">
+            <div class="school-logo">
+                <!-- 校徽图片已替换为用户提供的屏幕截图 (四川大学文字) -->
+                <img src="屏幕截图 2026-03-04 194641.png" alt="礼轩小学校徽">
+                <div>
+                    <div class="school-name">济南市历城区礼轩小学</div>
+                    <div class="school-address">济南市历城区唐冶街道世纪大道  ·  礼润童心 轩扬未来</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 导航 毛玻璃 -->
+    <nav>
+        <ul class="nav-list">
+            <li><a href="#">🏠 首页</a></li>
+            <li><a href="#">📖 学校简介</a></li>
+            <li><a href="#">👩‍🏫 师资力量</a></li>
+            <li><a href="#">📰 校园新闻</a></li>
+            <li><a href="#">🔬 教学教研</a></li>
+            <li><a href="#">🌟 德育天地</a></li>
+            <li><a href="#">📸 校园风采</a></li>
+            <li><a href="#">📢 招生招聘</a></li>
+            <li><a href="#">📞 联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- 轮播区域 (四张图片自动切换 + 毛玻璃文字) -->
+    <div class="banner">
+        <div class="banner-slider">
+            <div class="banner-slide" style="background-image: url('https://picsum.photos/1920/500?random=101');"></div>
+            <div class="banner-slide" style="background-image: url('https://picsum.photos/1920/500?random=102');"></div>
+            <div class="banner-slide" style="background-image: url('https://picsum.photos/1920/500?random=103');"></div>
+            <div class="banner-slide" style="background-image: url('https://picsum.photos/1920/500?random=104');"></div>
+        </div>
+        <div class="banner-text">
+            <h2>礼润童心 · 轩扬未来</h2>
+            <h1>学校校训：</h1>
+            <h2>礼立人生 · 轩行天下</h2>
+            <p>历城区现代化窗口学校 | 让每一颗星星都闪亮</p>
+        </div>
+    </div>
+
+    <!-- 主要内容 双栏 -->
+    <div class="main-content">
+        <!-- 左栏 -->
+        <div class="content-left">
+            <!-- 学校简介区块 -->
+            <div class="section intro">
+                <h2 class="section-title">🏛️ 学校简介</h2>
+                <p>济南市历城区礼轩小学位于唐冶核心区，占地面积30余亩，建筑面积15000平方米。学校引入“未来学习社区”概念，拥有科创中心、艺术馆、室内体育馆等一流设施。</p>
+                <p>在校生1500余人，教职工112人，其中齐鲁名师2人，省特级教师3人，市区骨干占比65%。学校以“礼”文化为根基，构建“轩志·轩文·轩能”课程体系，致力于培养具有中国心、世界眼的礼轩少年。</p>
+                <p>近三年荣获“山东省文明校园”“济南市教学示范校”“历城区质量先进单位”等20余项荣誉，成为东部城区冉冉升起的教育新星。</p>
+            </div>
+
+            <!-- 校园新闻 附加旋转小图标 -->
+            <div class="section news">
+                <h2 class="section-title">📌 校园新闻</h2>
+                <!-- 漂浮旋转装饰 -->
+                <div class="floating-badges">
+                    <div class="float-icon"><img src="ios-26-apple-4000x2182-23301.jpg" alt="icon"></div>
+                    <div class="float-icon"><img src="屏幕截图 2026-03-04 194641.png" alt="icon"></div>
+                    <div class="float-icon"><img src="https://picsum.photos/50/50?random=3" alt="icon"></div>
+                </div>
+                <ul class="news-list">
+                    <li><a href="#">礼轩小学承办济南市“黄河文化”主题教研现场会</a><span class="news-date">2026-03-12</span></li>
+                    <li><a href="#">我校男子足球队获历城区“体彩杯”冠军</a><span class="news-date">2026-03-08</span></li>
+                    <li><a href="#">植树节·“礼轩百草园”劳动实践基地开园</a><span class="news-date">2026-03-06</span></li>
+                    <li><a href="#">区教研中心视导暨“礼轩好课堂”展示活动</a><span class="news-date">2026-03-04</span></li>
+                    <li><a href="#">喜报：礼轩小学获评“山东省绿色学校”</a><span class="news-date">2026-02-28</span></li>
+                    <li><a href="#">家庭教育指导中心成立暨首次家长讲堂开讲</a><span class="news-date">2026-02-25</span></li>
+                </ul>
+                <p>
+济南市全国文明典范城市创建工作正在火热进行中，为响应号召，争创全国文明典范城市，历城二中师生身体力行，从小事做起，从点滴做起，为创建工作贡献力量。
+为了营造浓厚的创建氛围，学校通过电子显示屏、横幅、展板、电子班牌等，展标语、明要求，耳濡目染，让学生在潜移默化中规范自己的行为，争做文明人。同时学校还配备洒扫车，定时定期清理落叶垃圾，为学生营造良好的校园环境。
+  坚持立德树人，传承红色基因，学校推出了《妈妈教我一支歌》《黄河大合唱》《红色旋律舞动青春之志》等视频。全国优秀党务工作者，历城二中党委书记、校长李新生为部分同学带来“开学第一堂思政课”，同时，组织“班班讲党史”活动，党史教育入脑入心。发挥榜样引领作用，教师节表扬优秀教师，通过媒体宣传优秀教师事迹，传播教育好声音，树立榜样示范带头作用。
+  学校通过组织文明主题班会、文明班级板报等活动传递文明正能量。
+  现如今，历城二中礼轩小学2018级全体三班同学启动了“爱的陪伴”活动。老师们与学生们一起早读、用餐、自习、跑操，以身作则，用行动为学生做出榜样，提高了班级的凝聚力和归属感。这一暖心活动也使得级全体教师备受好评，家长感恩赠送三面锦旗以示感谢。
+  全校学生自觉增强文明意识，提高自身素质，争做文明二中人。他们遵守规章制度，自觉维护校园秩序；谦逊礼让，养成良好的行为习惯；知荣明耻讲文明，摈弃陋习树新风。
+  历城二中全体师生人人动手，全民参与，为创建文明典范城市添砖加瓦，与文明牵手，和礼貌相伴，将文明融入到生活的点点滴滴！
+文：何天宇  审稿：张蕊  编辑：刘洪岩</p>
+            </div>
+
+            <!-- 教学教研 区块 (新增内蒙交流详细报道) -->
+            <div class="section teaching-research">
+                <h2 class="section-title">🔬 教学教研</h2>
+                <!-- 内蒙交流核心报道 -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 22px; color: #1e4b77; margin-bottom: 8px;">我校三位教师应邀赴内蒙师大附中作交流报告</h3>
+                    <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px; color: #4a6382;">
+                        <span>📅 发布：lczx2025</span>
+                        <span>⏱️ 日期：2026-02-02 08:00:06</span>
+                    </div>
+                    <p style="margin-bottom: 20px; font-weight: 500; background: rgba(42,96,153,0.08); padding: 15px; border-radius: 30px;">我校三年级主任老师、唐冶校区一年级副主任老师应邀为内蒙师大附中班主任开展专业能力提升培训讲座。</p>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;">
+                    <!-- 胡魁标老师卡片 -->
+                    <div style="flex: 1; min-width: 250px; background: rgba(255,255,240,0.4); backdrop-filter: blur(4px); border-radius: 36px; padding: 22px; border: 1px solid rgba(255,255,255,0.8);">
+                        <h4 style="font-size: 20px; color:#1a3f63; border-left: 6px solid #2a6099; padding-left: 16px;">胡魁标 · 德行体验</h4>
+                        <p style="margin: 15px 0 10px;">山东省特级教师、省基础教育教师校长培训专家库成员、山东学校思政课教师年度人物、山东师范大学硕士生合作导师，曾获山东省优质课一等奖、山东省中小学班主任基本功展示一等奖等荣誉。</p>
+                        <p>他倡导的“德行体验”教育，贯通历史与现实、课堂与社会、个人成长与家国使命，在学生心中深植“强国有我”的信念。胡老师亦注重生命教育、青春期引导、素质拓展与感恩教育，让学生在故事中浸润、在情境中感悟、在实践中成长。</p>
+                        <p style="margin-top: 12px;">作为“全国卓越班主任论坛”的常邀嘉宾，胡魁标已向来自二十余省的教育同仁分享“德行体验”育人实践。此次在内蒙师大附中的报告，同样引发了班主任老师们的深入共鸣。</p>
+                    </div>
+                    <!-- 张希峰老师卡片 -->
+                    <div style="flex: 1; min-width: 250px; background: rgba(230,245,255,0.4); backdrop-filter: blur(4px); border-radius: 36px; padding: 22px; border: 1px solid rgba(255,255,255,0.8);">
+                        <h4 style="font-size: 20px; color:#1a3f63; border-left: 6px solid #2a6099; padding-left: 16px;">张希峰 · 心理护航</h4>
+                        <p style="margin: 15px 0 10px;">较早投身学校心理健康教育，通过自学考取心理咨询师资格，牵头成立心理健康教研组，建设心理活动中心，设立班级心理委员，逐步构建起“预防—干预—支持”一体化心育体系。</p>
+                        <p>报告中，他聚焦青少年心理护航，深入剖析学生心理特征，结合真实案例，系统讲解心理危机的识别、干预与后续支持策略，强调班主任应成为学生心理健康的“守门人”，具备敏锐的觉察力、智慧的沟通力与温暖的共情力。</p>
+                    </div>
+                </div>
+
+                <!-- 结语与编辑信息 -->
+                <div style="background: rgba(210,230,250,0.3); border-radius: 40px; padding: 20px; margin-top: 12px;">
+                    <p style="font-style: italic;">✨ 更多有风格、有专攻、有情怀的班主任，将会持续走出校园、走向更广阔的交流讲坛，展现“勤志”育人者的风采，在教育共进的路上，彼此照亮，同行致远。</p>
+                    <div style="display: flex; justify-content: flex-end; gap: 20px; margin-top: 18px; color: #2e4a70; font-size: 15px;">
+                        <span>撰稿：李黎</span> <span>编辑：扈骏一</span> <span>初审：王贵娟</span> <span>复审：温连涛</span> <span>终审：李玉华</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 校园风采 加强动画图片 -->
+            <div class="section gallery">
+                <h2 class="section-title">🌈 校园风采</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="999c24fa674c43799dd5b06442d3bb64.jpg" alt="校园春景">
+                        <p>🌳 春·礼轩庭院</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="b79d2cb1877b3a7f5188bcd4ce960943.jpg" alt="智慧教室">
+                        <p>💡 智慧课堂</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="85V888piC2Zi.jpg-0 (1).jpg" alt="艺术节">
+                        <p>🎨 校园艺术节</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="b79d2cb1877b3a7f5188bcd4ce960943.jpg" alt="图书馆">
+                        <p>📚 星空图书馆</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3552.jpg_wh860.jpg" alt="操场">
+                        <p>⚽ 绿茵少年</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="90.jfif" alt="科创">
+                        <p>🧪 小小科学家</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右栏 -->
+        <div class="content-right">
+            <!-- 联系方式 毛玻璃卡片 -->
+            <div class="side-card contact">
+                <h2 class="section-title">📬 联系我们</h2>
+                <div class="contact-info">
+                    <p>📍 历城区唐冶街道世纪大道1568号</p>
+                    <p>⏰ 周一至周五 8:00-18:30</p>
+                </div>
+                <!-- 额外图片 -->
+                <div style="display:flex; justify-content:center; margin-top:10px;">
+                    <img src="https://picsum.photos/200/100?random=501" style="width:100%; border-radius:50px; filter: drop-shadow(0 10px 12px #00000030);">
+                </div>
+            </div>
+
+            <!-- 招生信息 强化动态 -->
+            <div class="side-card admission">
+                <h2 class="section-title">📢 招生专栏</h2>
+                <p>📌 2026年一年级招生计划<br>⏳ 报名时间：<br>📝 学区范围：唐冶西路以东、世纪大道两侧。</p>
+                <p style="margin-top: 20px; font-weight: 700; background: rgba(255,255,255,0.4); border-radius: 60px; padding: 15px; text-align: center; animation: gentlePulse 2.5s infinite;">
+                    🌟 招生专线
+                </p>
+                <!-- 浮动图片 -->
+                <div style="display:flex; gap:8px; margin-top:20px;">
+                    <img src="https://picsum.photos/80/80?random=601" style="border-radius: 30px; rotate: 2deg; transition:0.3s;">
+                    <img src="https://picsum.photos/80/80?random=602" style="border-radius: 30px; rotate: -2deg; transition:0.3s;">
+                </div>
+            </div>
+
+            <!-- 新增荣誉卡片 毛玻璃跳动 -->
+            <div class="side-card" style="background: rgba(255,240,210,0.4);">
+                <h2 class="section-title">🏆 荣誉时刻</h2>
+                <p>⭐ 历城区教学质量一等奖（2025）<br>⭐ 济南市首批“新优学校”<br>⭐ 山东省青少年航空航海模型大赛优秀单位<br>⭐ 全国青少年校园足球特色学校</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 毛玻璃深化 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="footer-title">学校导览</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#">👉 学校概况</a></li>
+                    <li><a href="#">👉 教师发展</a></li>
+                    <li><a href="#">👉 学生天地</a></li>
+                    <li><a href="#">👉 家校互联</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">学校位置</h3>
+                <p>📍 历城区唐冶街道世纪大道</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">关注我们</h3>
+                <p>微信公众号：济南礼轩小学</p>
+                <p>抖音：@lixuan_edu</p>
+                <p>视频号：历城礼轩</p>
+            </div>
+            <div class="copyright">
+                <p>© 2026 济南市历城区礼轩小学 版权所有 | 鲁ICP备202600001号 | 建议使用毛玻璃效果浏览 ✨</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
